@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+ <array name="lessons">
+   <item>@string/words_1</item>
+   <item>@string/words_2</item>
+   <item>@string/words_3</item>
+   <item>@string/words_4</item>
+   <item>@string/words_5</item>
+   <item>@string/words_6</item>
+   <item>@string/words_7</item>
+   <item>@string/words_8</item>
+   <item>@string/words_9</item>
+   <item>@string/words_10</item>
+   <item>@string/words_11</item>
+   <item>@string/words_12</item>
+   <item>@string/words_13</item>
+   <item>@string/words_14</item>
+   <item>@string/words_15</item>
+   <item>@string/words_16</item>
+   <item>@string/words_17</item>
+   <item>@string/words_18</item>
+ </array>
+</resources>
