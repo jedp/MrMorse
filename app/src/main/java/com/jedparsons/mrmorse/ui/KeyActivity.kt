@@ -3,7 +3,6 @@ package com.jedparsons.mrmorse.ui
 import android.os.Bundle
 import android.view.KeyEvent.ACTION_UP
 import android.view.KeyEvent.KEYCODE_Q
-import android.view.KeyEvent as AndroidKeyEvent
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -17,12 +16,11 @@ import com.jedparsons.mrmorse.ui.KeyEvent.KEY_DOWN
 import com.jedparsons.mrmorse.ui.KeyEvent.KEY_UP
 import com.jedparsons.mrmorse.ui.theme.MrMorseTheme
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.cancellable
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import logcat.logcat
+import android.view.KeyEvent as AndroidKeyEvent
 
 class KeyActivity : ComponentActivity() {
 
@@ -30,13 +28,13 @@ class KeyActivity : ComponentActivity() {
   private val quizViewModel: QuizViewModel by viewModels()
   private val keyViewModel: KeyViewModel by viewModels()
 
+  private var inKeyPress = false
+
   private lateinit var app: AppContainer
-  private lateinit var quizFlowJob :Job
+  private lateinit var quizFlowJob: Job
   private lateinit var codeFlowJob: Job
-  private lateinit var letterFlowJob:Job
-  private lateinit var textFlowJob:Job
-
-
+  private lateinit var letterFlowJob: Job
+  private lateinit var textFlowJob: Job
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -105,21 +103,23 @@ class KeyActivity : ComponentActivity() {
 
   override fun onKeyDown(keyCode: Int, event: AndroidKeyEvent?): Boolean {
     if (keyCode != KEYCODE_Q) {
-     return false
+      return false
     }
-    logcat { "Key Down: $keyCode, $event"}
+    logcat { "Key Down: $keyCode, $event" }
     app.demodulator.onPress()
     app.oscillator.pressKey()
+    inKeyPress = true
     return true
   }
 
   override fun onKeyUp(keyCode: Int, event: AndroidKeyEvent?): Boolean {
-    if (keyCode != ACTION_UP) {
+    if (!inKeyPress) {
       return false
     }
-    logcat { "Key Up: $keyCode, $event"}
+    logcat { "Key Up: $keyCode, $event" }
     app.demodulator.onRelease()
     app.oscillator.releaseKey()
+    inKeyPress = false
     return true
   }
 

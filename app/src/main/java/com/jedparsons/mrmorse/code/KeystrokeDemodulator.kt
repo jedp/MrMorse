@@ -27,7 +27,7 @@ class KeystrokeDemodulator(
 
   private var inWord = false
   private var lastPress = System.currentTimeMillis()
-  private var ditRateMillis = 130L
+  private var ditRateMillis = 180L
   private val timer = CountdownTimer(Dispatchers.IO, ditRateMillis * 8, ::paused)
 
   val textFlow: Flow<String> = decodingMachine.textFlow

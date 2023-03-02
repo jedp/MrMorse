@@ -46,10 +46,13 @@ Java_com_jedparsons_mrmorse_audio_RealSamplePlayer_teardownAudioStreamNative(JNI
 }
 
 JNIEXPORT jboolean JNICALL Java_com_jedparsons_mrmorse_audio_RealSamplePlayer_loadWavAssetNative(
-        JNIEnv *env, jobject, jbyteArray bytearray, jint channels) {
+        JNIEnv *env,
+        jobject,
+        jbyteArray bytearray,
+        jint channels) {
     float pan = 0.0f; // left:-1.0f < center:0.0f > right:1.0f
     int len = env->GetArrayLength(bytearray);
-    unsigned char *buf = new unsigned char[len];
+    auto *buf = new unsigned char[len];
     env->GetByteArrayRegion(bytearray, 0, len, reinterpret_cast<jbyte *>(buf));
 
     MemInputStream stream(buf, len);
@@ -59,10 +62,10 @@ JNIEXPORT jboolean JNICALL Java_com_jedparsons_mrmorse_audio_RealSamplePlayer_lo
 
     jboolean isFormatValid = reader.getNumChannels() == channels;
 
-    SampleBuffer *sampleBuffer = new SampleBuffer();
+    auto *sampleBuffer = new SampleBuffer();
     sampleBuffer->loadSampleData(&reader);
 
-    OneShotSampleSource *source = new OneShotSampleSource(sampleBuffer, pan);
+    auto *source = new OneShotSampleSource(sampleBuffer, pan);
     player.addSampleSource(source, sampleBuffer);
 
     delete[] buf;

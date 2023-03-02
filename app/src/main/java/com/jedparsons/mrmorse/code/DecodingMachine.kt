@@ -84,6 +84,7 @@ class DecodingMachine(
       val currentCode = state.currentCode as Node
       when (stroke) {
         NOTHING -> {
+          // Probably initial state. Just ignore.
         }
         DIT -> state.currentCode = currentCode.nextDit
         DAH -> state.currentCode = currentCode.nextDah
