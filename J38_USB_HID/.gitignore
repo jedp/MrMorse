@@ -1,0 +1,11 @@
+.settings/
+.cproject
+.mxproject
+
+Debug/P38_HID.bin
+Debug/P38_HID.elf
+Debug/P38_HID.list
+Debug/P38_HID.map
+
+*.o
+

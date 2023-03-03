@@ -1,0 +1,5 @@
+main.c:70:6:sendKeyDown	8	static
+main.c:78:6:sendKeyUp	8	static
+main.c:92:5:main	8	static
+main.c:149:6:SystemClock_Config	112	static
+main.c:194:6:Error_Handler	8	static,ignoring_inline_asm
